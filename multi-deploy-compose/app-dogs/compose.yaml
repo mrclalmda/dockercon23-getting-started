@@ -8,8 +8,12 @@
 # http://dogs.localhost simply won't work. Figure out why and get it working!
 
 services:
-  app:
+  whales:
     image: mikesir87/cats:2.0
     labels:
       traefik.http.routers.dogs.rule: Host(`dogs.localhost`)
       traefik.http.services.dogs.loadbalancer.server.port: 5000
+networks:
+  default:
+    name: proxy
+    external: true

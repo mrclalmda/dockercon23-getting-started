@@ -33,6 +33,7 @@ Main takeways:
 * --heath-interval -> how often should it be health-cheacked
 
 ### Working with Volumes
+Here we can learn about how the command -v works
 
 1) docker volume create database-files 
 docker volume create volume1
@@ -42,12 +43,13 @@ docker volume create volume1
 
 Main takeaways:
 * The default command upon initializing a container is replaced by whatever is after the image name
-* -v -> bind mount a volume; basically copies content from one folder to another one inside the container
+* -v (volume) -> bind mount a volume; basically copies content from one folder to another one inside the container
 * $(pwd) -> specify the path to the dev-express folder relative to current working directory
 * -w -> sets container working directory
 
 ### Building images
 This section covers Dockerfile usage, therefore most of the answers are inside the Dockerfiles
+
 1) docker build -t first-build .
 2) docker build -t simple-python-webapp .
 3) docker build -t nonroot-node-app
@@ -59,6 +61,37 @@ Key takeways:
 * To create another stage, use FROM img:version AS stageName
 * --chown -> sets file/folder owner
 * Most used instructions: FROM, WORKDIR, COPY, RUN, EXPOSE, CMD
+
+### Multi-service applications 
+Get in touch with docker compose 
+
+1) docker network create getting-started
+2) docker run --name networked-db -e MYSQL_ROOT_PASSWORD=pwd -e MYSQL_DATABASE=db --network getting-started --network-alias db mysql
+3) docker network create wordpress
+
+docker run -d --network wordpress --network-alias db -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=wordpress mysql
+
+docker run -d --network wordpress -e WORDPRESS_DB_HOST=db -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=secret wordpress:6-apache
+4) see multi-deploy-compose folder 
+
+docker compose up
+
+5) see compose-project folder
+
+while trying to target the dev stage Ive encountered some issues that this question on stackoverflow helped solve
+https://stackoverflow.com/questions/69042916/docker-compose-does-not-start-the-specified-stage
+
+Basically what I had to do was to run docker build before docker compose up, after that I managed to validate my answer and finish the workshop.
+
+Key takeaways:
+
+* Docker commands can be translated to compose files
+* Use "target" section to pick between Dockerfile stages
+* --network -> place container in specific network so it can communicate with other apps
+* Each image have their own env variable and should be checked in their own docs
+* Ports and volumes are supposed to be represented as lists
+* Add network section to an app's compose file to mimic -network parameter
+
 
 ## Need help?
 

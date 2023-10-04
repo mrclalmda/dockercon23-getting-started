@@ -8,8 +8,12 @@
 # http://cats.localhost simply won't work. Figure out why and get it working!
 
 services:
-  app:
+  whales:
     image: mikesir87/cats:1.0
     labels:
       traefik.http.routers.cats.rule: Host(`cats.localhost`)
       traefik.http.services.cats.loadbalancer.server.port: 5000
+networks:
+  default:
+    name: proxy
+    external: true
