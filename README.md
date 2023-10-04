@@ -1,29 +1,35 @@
 # DockerCon 2023 Getting Started Workshop
 
-Welcome to the workshop materials repo! This repository contains many of the supporting files and projects you will need in order to complete the various challenges that lie before you!
+This repository contains my answers for the various challenges I completed during the Gettign Started with Docker Workshop
 
 ## Pre-requisites
 
-You need Docker Desktop installed, preferably the latest version to give you the latest features and performance gains. However, 4.10 or later will suffice.
-
-## Installing the extension
-
-The challenge board (see screenshot below) is available as a Docker extension. To install it, follow one of the following steps:
-
-- [Click this link](https://open.docker.com/extensions/marketplace?extensionId=mikesir87/dockercon23-extension&tag=latest) to install the extension
-- OR run this command:
-
-    ```
-    docker extension install mikesir87/dockercon23-extension
-    ```
-
-After a moment, you should see the extension appear in the left-hand navigation menu.
+You need Docker Desktop installed and the following extension
+ [Click this link](https://open.docker.com/extensions/marketplace?extensionId=mikesir87/dockercon23-extension&tag=latest)
 
 ## Completing the challenges
 
-Once you have the extension installed, you can open it, complete the quick "sign up", and then start working on the various challenges! 
+### Running Containers
+In this part, the main go is to understand basic docker commands
 
-When you think you've got it done, simply click on the **Verify your solution** button. When you do so, various tests will run to validate your solution. If it passes, the points will be awarded!
+1)docker run --name hello-world hello-world
+2)docker run -it --name timer -rm ubuntu sleep 30
+3)docker run -d -p 80:8080 --name nginx nginx:alpine
+4)docker run -d --label training.app=mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=app mysql
+5)docker run -d -p 5050:5000 --label training.app=cats --health-cmd="curl -f http://localhost:5000/healthcheck" --health-interval=5s mikesir87/cats:1.0
+
+image name often comes last and the : allows you to pick specific image versions
+docker -> all docker commands starts with docker(!)
+run -> starts/runs a docker image
+--name -> sets the name of the container to be created
+-it -> iteractive mode; after running it, your terminal is positioned inside the container
+-d -> detached mode; terminal is not bound to the container
+-p -> X:Y;exposes port X on the host port Y
+--label -> key-pair values
+-e -> setts env variables 
+--health-cmd -> checks availability of the application
+--heath-interval -> how often should it be health-cheacked
+
 
 ## Need help?
 
