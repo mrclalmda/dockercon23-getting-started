@@ -14,3 +14,10 @@ COPY src ./src
 RUN yarn build
 
 # TODO - Create a new stage that copies the built assets into the webroot of an nginx:alpine image
+FROM nginx:alpine
+
+# Copy the built assets from the build stage into the webroot
+COPY --from=build /usr/local/app/dist /usr/share/nginx/html
+
+EXPOSE 80
+

@@ -46,6 +46,19 @@ Main takeaways:
 * $(pwd) -> specify the path to the dev-express folder relative to current working directory
 * -w -> sets container working directory
 
+### Building images
+This section covers Dockerfile usage, therefore most of the answers are inside the Dockerfiles
+1) docker build -t first-build .
+2) docker build -t simple-python-webapp .
+3) docker build -t nonroot-node-app
+4) docker build -t multi-stage-react-app
+
+Key takeways:
+
+* Dockerfile is basically a file that configures multiple commands that will be executed in order
+* To create another stage, use FROM img:version AS stageName
+* --chown -> sets file/folder owner
+* Most used instructions: FROM, WORKDIR, COPY, RUN, EXPOSE, CMD
 
 ## Need help?
 
