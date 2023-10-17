@@ -72,6 +72,7 @@ Get in touch with docker compose
 docker run -d --network wordpress --network-alias db -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=wordpress mysql
 
 docker run -d --network wordpress -e WORDPRESS_DB_HOST=db -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=secret wordpress:6-apache
+
 4) see multi-deploy-compose folder 
 
 docker compose up
